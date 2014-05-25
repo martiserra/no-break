@@ -4,7 +4,8 @@
  */
 var init = require('./config/init')(),
 	config = require('./config/config'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+  autoIncrement = require('mongoose-auto-increment');
 
 /**
  * Main application entry file.
@@ -13,6 +14,7 @@ var init = require('./config/init')(),
 
 // Bootstrap db connection
 var db = mongoose.connect(config.db);
+autoIncrement.initialize(db.connection);
 
 // Init the express application
 var app = require('./config/express')(db);
